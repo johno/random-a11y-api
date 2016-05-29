@@ -24,7 +24,7 @@ class VotesController < ApplicationController
       @combo = Combo.where(
         color_one: params[:combo],
         color_two: params[:combo]
-      )
+      ).first
 
       @combo = Combo.create(
         color_one: params[:combo][0],
