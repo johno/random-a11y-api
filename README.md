@@ -1,24 +1,22 @@
-# README
+# a11y-combos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The back end for voting on accessible color combinations.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+```sh
+git clone https://github.com/johnotander/a11y-combos-api.git
+cd a11y-combos-api
+bundle
+```
 
-* System dependencies
+## Usage
 
-* Configuration
+```
+rails s
+rake test
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"vote": { "value": true }, "combo": ["#111", "#fafafa"]}' http://a11ycombos.herokuapp.com/votes
+```
