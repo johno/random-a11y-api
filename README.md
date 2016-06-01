@@ -18,5 +18,5 @@ rake test
 ```
 
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"vote": { "value": true }, "combo": ["#111", "#fafafa"]}' http://a11ycombos.herokuapp.com/votes
+curl -H "Content-Type: application/json" -X POST -d '{"vote": { "value": true }, "combo": ["#111", "#fafafa"]}' http://randoma11y.com/votes
 ```
