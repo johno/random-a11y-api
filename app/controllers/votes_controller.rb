@@ -29,7 +29,7 @@ class VotesController < ApplicationController
       ).first
 
       @combo = Combo.create(
-        color_one: combo[0]
+        color_one: combo[0],
         color_two: combo[1]
       ) if @combo.blank?
     end
