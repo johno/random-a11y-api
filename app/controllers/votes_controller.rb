@@ -20,7 +20,8 @@ class VotesController < ApplicationController
   private
 
   def set_combo
-    if params[:combo].length == 2
+    puts params.inspect
+    if params[:combo] && params[:combo].length == 2
       @combo = Combo.where(
         color_one: params[:combo],
         color_two: params[:combo]
