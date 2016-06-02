@@ -20,16 +20,17 @@ class VotesController < ApplicationController
   private
 
   def set_combo
-    puts params.inspect
-    if params[:combo] && params[:combo].length == 2
+    combo = params.permit(:combo) || []
+    puts combo.inspect
+    if combo.length == 2
       @combo = Combo.where(
-        color_one: params[:combo],
-        color_two: params[:combo]
+        color_one: combo,
+        color_two: combo
       ).first
 
       @combo = Combo.create(
-        color_one: params[:combo][0],
-        color_two: params[:combo][1]
+        color_one: combo[0]
+        color_two: combo[1]
       ) if @combo.blank?
     end
   end
