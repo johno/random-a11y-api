@@ -26,5 +26,11 @@ module A11yCombosApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.middleware.use Rack::Cors do
+      allow do
+        origins 'localhost:8080', 'www.randoma11y.com', 'randoma11y.com'
+        resource '/*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
+      end
+    end
   end
 end

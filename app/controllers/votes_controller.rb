@@ -20,8 +20,7 @@ class VotesController < ApplicationController
   private
 
   def set_combo
-    combo = params.permit(combo: []) || []
-    puts combo.inspect
+    combo = params[:combo] || []
     if combo.length == 2
       @combo = Combo.where(
         color_one: combo,
