@@ -5,9 +5,7 @@ class CombosController < ApplicationController
   end
 
   def top
-    @combos = Combo.all.includes(:votes)
-                   # Order by associated votes with value: false
-                   .order(created_at: :desc).limit(50)
+    @combos = Combo.select('*', 'SELECT count(1) AS total_votes FROM votes WHERE votes.combo_id = combo.id').order('total_votes')
     render json: @combos.as_json(include_votes: true)
   end
 end

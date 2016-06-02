@@ -18,7 +18,7 @@ class CombinationFlowTest < ActionDispatch::IntegrationTest
     other = Combo.create!(color_one: '#fff', color_two: '#444')
 
     3.times do
-      top.create_vote(value: true)
+      top.votes.create(value: true)
     end
 
     get '/combos/top'
