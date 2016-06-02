@@ -21,10 +21,16 @@ class CombinationFlowTest < ActionDispatch::IntegrationTest
       top.votes.create(value: true)
     end
 
+    4.times do
+      other.votes.create(value: false)
+    end
+
+    other.votes.create(value: true)
+
     get '/combos/top'
 
     res = JSON.parse(response.body)
-    assert res.first['id'] == most_recent.id
+    assert res.first['id'] == top.id
     assert res.first['votes'].length == 3
     assert_response :success
   end

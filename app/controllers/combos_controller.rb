@@ -4,8 +4,24 @@ class CombosController < ApplicationController
     render json: @combos
   end
 
+  def active
+    @combos = Combo.all
+                   .select('combos.id, count(votes.id) AS votes_count')
+                   .joins(:votes)
+                   .group('combos.id')
+                   .order(votes_count: :desc)
+
+    render json: @combos.as_json(include_votes: true)
+  end
+
   def top
-    @combos = Combo.select('*', 'SELECT count(1) AS total_votes FROM votes WHERE votes.combo_id = combo.id').order('total_votes')
+    @combos = Combo.all
+                   .select('combos.id, votes.value, count(votes.id) AS votes_count')
+                   .joins(:votes)
+                   .where(votes: { value: true })
+                   .group('combos.id')
+                   .order(votes_count: :desc)
+
     render json: @combos.as_json(include_votes: true)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529170006) do
+ActiveRecord::Schema.define(version: 20160602233521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20160529170006) do
   create_table "combos", force: :cascade do |t|
     t.string   "color_one"
     t.string   "color_two"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.decimal  "contrast",   precision: 10, scale: 2
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.decimal  "contrast",    precision: 10, scale: 2
+    t.integer  "votes_count",                          default: 0
   end
 
   create_table "votes", force: :cascade do |t|
