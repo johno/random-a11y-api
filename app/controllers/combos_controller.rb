@@ -16,7 +16,6 @@ class CombosController < ApplicationController
 
   def top
     @combos = Combo.all
-                   .select('combos.id, votes.value, count(votes.id) AS votes_count')
                    .joins(:votes)
                    .where(votes: { value: true })
                    .group('combos.id')

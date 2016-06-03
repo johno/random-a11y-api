@@ -8,17 +8,9 @@ class Combo < ApplicationRecord
 
     super.merge({
       votes: votes,
-      up_votes: up_votes,
-      down_votes: down_votes
+      up_votes: votes.where(value: true),
+      down_votes: votes.where(value: false)
     })
-  end
-
-  def up_votes
-    votes.where(value: true)
-  end
-
-  def down_votes
-    votes.where(value: false)
   end
 
   private
