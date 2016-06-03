@@ -15,12 +15,8 @@ class CombosController < ApplicationController
   end
 
   def top
-    @combos = Combo.all
-                   .joins(:votes)
-                   .where(votes: { value: true })
-                   .group('combos.id')
-                   .order(votes_count: :desc)
-
+    @combos = Combo.joins(:votes).select('count(*) FROM votes WHERE combo_id = combos.id AND value = true AS up_votes_count').order('up_votes_count')
+    puts @combos.inspect
     render json: @combos.as_json(include_votes: true)
   end
 end
