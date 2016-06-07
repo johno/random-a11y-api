@@ -1,6 +1,8 @@
 class CombosController < ApplicationController
+  before_action :set_page_options, only: :index
+
   def index
-    @combos = Combo.all.order(created_at: :desc).includes(:votes).limit(params[:per_page] || 50)
+    @combos = Combo.order(id: :desc).offset((@page-1) * @per_page).limit(@per_page)
     render json: @combos.as_json(include_vote_counts: true)
   end
 
@@ -19,5 +21,14 @@ class CombosController < ApplicationController
     @combos = Combo.where(id: combo_ids)
 
     render json: @combos.as_json(include_votes: true)
+  end
+
+  private
+
+  def set_page_options
+    @per_page = params[:per_page] || 50
+    @per_page = 1000 if @per_page > 1000
+
+    @page = params[:page] || 1
   end
 end
