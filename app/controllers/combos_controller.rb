@@ -26,9 +26,9 @@ class CombosController < ApplicationController
   private
 
   def set_page_options
-    @per_page = params[:per_page] || 50
-    @per_page = 1000 if @per_page > 1000
+    @per_page = (params[:per_page] || 50).to_i
+    @per_page = 1000 if @per_page > 1000 || @per_page.zero?
 
-    @page = params[:page] || 1
+    @page = (params[:page] || 1).to_i
   end
 end
