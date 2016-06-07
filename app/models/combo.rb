@@ -4,13 +4,20 @@ class Combo < ApplicationRecord
   validate :colors_are_hex
 
   def as_json(opts = {})
-    return super unless opts[:include_votes]
+    return super unless opts[:include_votes] || opts[:include_vote_counts]
 
-    super.merge({
-      votes: votes,
-      up_votes: votes.where(value: true),
-      down_votes: votes.where(value: false)
-    })
+    if opts[:include_vote_counts]
+      super.merge({
+        up: votes.where(value: true).count,
+        down: votes.where(value: false).count
+      })
+    else
+      super.merge({
+        votes: votes,
+        up_votes: votes.where(value: true),
+        down_votes: votes.where(value: false)
+      })
+    end
   end
 
   private

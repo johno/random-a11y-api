@@ -1,7 +1,7 @@
 class CombosController < ApplicationController
   def index
-    @combos = Combo.all.order(created_at: :desc).limit(50)
-    render json: @combos
+    @combos = Combo.all.order(created_at: :desc).includes(:votes).limit(params[:per_page] || 50)
+    render json: @combos.as_json(include_vote_counts: true)
   end
 
   def active
